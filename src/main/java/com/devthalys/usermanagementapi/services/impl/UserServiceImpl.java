@@ -1,10 +1,8 @@
 package com.devthalys.usermanagementapi.services.impl;
 
-import com.devthalys.usermanagementapi.dtos.UserDto;
 import com.devthalys.usermanagementapi.models.UserModel;
 import com.devthalys.usermanagementapi.repositories.UserRepository;
 import com.devthalys.usermanagementapi.services.UserService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,5 +39,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void delete(UserModel user) {
         userRepository.delete(user);
+    }
+
+    @Override
+    public void update(UserModel user) {
+        userRepository.save(user);
     }
 }

@@ -4,7 +4,6 @@ import com.devthalys.usermanagementapi.dtos.UserDto;
 import com.devthalys.usermanagementapi.models.UserModel;
 import com.devthalys.usermanagementapi.services.impl.UserServiceImpl;
 import jakarta.validation.Valid;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -52,5 +51,24 @@ public class UserController {
         }
         userService.delete(userId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body("User deleted success.");
+    }
+
+    @PutMapping(value = "/update/{id}")
+    public ResponseEntity<Object> update(@PathVariable UUID id, @RequestBody @Valid UserDto user){
+        UserModel userId = userService.findById(id);
+        if(userId == null){
+            ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found or do not registered in system.");
+        }
+
+        userId.setFirstName(user.firstName());
+        userId.setSecondName(user.secondName());
+        userId.setAge(user.age());
+        userId.setAddress(user.address());
+        userId.setCpf(user.cpf());
+        userId.setRg(user.rg());
+        userId.setEmail(user.email());
+
+        userService.update(userId);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("User updated success.");
     }
 }

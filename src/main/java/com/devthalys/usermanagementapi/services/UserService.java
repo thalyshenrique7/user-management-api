@@ -12,4 +12,5 @@ public interface UserService {
     UserModel findById(UUID id);
     void save(UserModel user);
     void delete(UserModel user);
+    void update(UserModel user);
 }
