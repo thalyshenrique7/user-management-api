@@ -1,0 +1,1 @@
+alter table users change id id binary(16);
